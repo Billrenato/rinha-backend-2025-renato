@@ -1,0 +1,60 @@
+version: "3.9"
+
+networks:
+  payment-processor:
+    external: true  # A rede dos payment processors deve existir (veja instruções do enunciado)
+
+services:
+  api1:
+    build: .
+    image: renato/rinha-backend-api:latest
+    container_name: rinha_api1
+    environment:
+      - PP_DEFAULT=http://payment-processor-default:8080
+      - PP_FALLBACK=http://payment-processor-fallback:8080
+      - DB_PATH=/data/payments.db
+    networks:
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.75"
+          memory: "175MB"
+    volumes:
+      - ./data:/data
+
+  api2:
+    build: .
+    image: renato/rinha-backend-api:latest
+    container_name: rinha_api2
+    environment:
+      - PP_DEFAULT=http://payment-processor-default:8080
+      - PP_FALLBACK=http://payment-processor-fallback:8080
+      - DB_PATH=/data/payments.db
+    networks:
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.75"
+          memory: "175MB"
+    volumes:
+      - ./data:/data
+
+  nginx:
+    image: nginx:alpine
+    container_name: rinha_nginx
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api1
+      - api2
+    networks:
+      - payment-processor
+    deploy:
+      resources:
+        limits:
+          cpus: "0.0"
+          memory: "42MB"

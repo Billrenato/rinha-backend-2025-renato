@@ -1,0 +1,10 @@
+{
+  "name": "Renato Mathias",
+  "social": ["https://github.com/Billrenato"],
+  "source-code-repo": "https://github.com/Billrenato/rinha-backend-2025",
+  "langs": ["python", "fastapi"],
+  "storages": ["sqlite"],
+  "messaging": [],
+  "load-balancers": ["nginx"],
+  "other-technologies": ["httpx", "uvicorn", "docker"]
+}
