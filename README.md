@@ -18,7 +18,7 @@ Objetivos:
 
 ### 1) Clonar repositório dos Payment Processors oficiais
 > Os Payment Processors precisam estar rodando para criar a rede e endpoints.
-```bash
+
 git clone https://github.com/zanfranceschi/rinha-de-backend-2025.git payment_processors
 cd payment_processors
 # suba os processors (veja instruções do repositório oficial)
@@ -30,12 +30,10 @@ http://localhost:8001 -> payment-processor-default
 http://localhost:8002 -> payment-processor-fallback
 
 2) Voltar para este projeto
-bash
-Copiar código
+
 cd ../rinha-backend-2025-renato
 3) Build e run (modo desenvolvimento)
-bash
-Copiar código
+
 # build das imagens
 docker compose build
 
@@ -46,7 +44,6 @@ Os endpoints estarão acessíveis via http://localhost:9999 (através do nginx):
 POST http://localhost:9999/payments
 
 json
-Copiar código
 {
   "correlationId": "uuid",
   "amount": 19.90
@@ -56,8 +53,7 @@ GET http://localhost:9999/payments-summary
 4) Testes de carga (exemplo com hey ou k6)
 Exemplo simples com hey:
 
-bash
-Copiar código
+
 hey -n 1000 -c 50 -m POST -H "Content-Type: application/json" -d '{"correlationId":"11111111-1111-1111-1111-111111111111","amount":10.0}' http://localhost:9999/payments
 Para medir p99 use k6 ou outra ferramenta que gere relatórios de percentis.
 
@@ -94,8 +90,6 @@ Gere o repositório git com estes arquivos e o README pronto (conteúdo que voc�
 
 Ou que eu gere um docker-compose-arm64.yml adicional?
 
-yaml
-Copiar código
 
 ---
 
@@ -111,10 +105,4 @@ Copiar código
 
 ---
 
-Se quiser, eu já faço **um commit inicial** com todos esses arquivos formatados (te entrego o conteúdo pronto para colar), ou **posso criar diretamente os arquivos aqui** para você copiar.  
-Qual prefere agora:
-1. Eu te dou um **ZIP baixável** (coloco os arquivos prontos aqui e gero link)?  
-2. Ou eu imprimo aqui mesmo o conteúdo completo de cada arquivo para você copiar/colar no seu ambiente?
 
-Escolha e eu gero imediatamente o que você preferir.
-::contentReference[oaicite:0]{index=0}
